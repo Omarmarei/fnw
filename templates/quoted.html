@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+
+<p><b>The share of {{ stock["symbol"] }} current price is {{ stock["price"] | usd }} </b></p>
+<br><br><br> <a href=/>See your stock portfolio</a> <br><br><br>
+{% endblock %}

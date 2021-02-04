@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Success
+{% endblock %}
+
+{% block main %}
+
+<p><b>You bought {{amount}} shares of {{ stock["name"] }} {{ stock["symbol"] }} Successfully!<br> current price/share  {{ stock["price"] | usd }} </b></p>
+
+
+<P><b> You paid {{ totalprice | usd }} and Your Avaliabel cash {{ newcash | usd }}  </b> </P> <br><br><br>
+<a href=/>See your stock portfolio</a>
+<br><br><br>
+{% endblock %}
+

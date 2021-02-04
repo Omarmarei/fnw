@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block title %}
+    C$50 Finance: Portofolio
+{% endblock %}
+
+{% block main %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Sympol</th>
+      <th scope="col">Name</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+      <th scope="col">Buy or Sell</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% set count = namespace(value = 0) %}
+        {% for saved,fitched in zip(sharesport,stockinfo1) %}
+        <tr>
+            <td class= "align-middle">{{saved.symbol}}</td>
+            <td class= "align-middle">{{fitched.name}}</td>
+            <td class= "align-middle">{{saved.totalshares}}</td>
+            <td class= "align-middle">{{fitched.price | usd}}</td>
+            <td class= "align-middle">{{(fitched.price*saved.totalshares) | usd}}</td>
+          <!--{% block javascript %}-->
+          <!--    <script src="{{ url_for('static',filename='myscript.js') }}"></script>-->
+          <!--{% endblock %}-->
+
+            <td>
+              <form action="/sell" method="post">
+  <div class="form-group-sm">
+    <input type="hidden" name="symbol" value= "{{saved.symbol}}">
+    <input type="number" name="amount" class="form-control -sm" placeholder="Amount" min="1" size="8" required>
+    <button type="submit" class="btn btn-primary">Sell</button>
+  </div>
+</form>
+  <form action="/buy" method="post">
+  <div class="form-group-sm">
+    <input type="hidden" name="symbol" value= "{{saved.symbol}}">
+    <input type="number" name="amount" class="form-control -sm" placeholder="Amount" min="1" size="8" required>
+    <button type="submit" class="btn btn-primary">Buy</button>
+  </div>
+
+</form>
+
+    </div></td>
+            {% set count.value = count.value + (fitched.price*saved.totalshares) %}
+
+
+        </tr>
+        {% endfor %}
+        <th scope="row"colspan="4">Cash</th>
+            <td>{{cashcheck |float | usd}}</td>
+    <tr>
+      <th scope="row"colspan="4"><b>Owned Assits</b> -->  Stocks’ Total Value Plus Cash</th>
+      <td > {{ (count.value + cashcheck) |float | usd  }}</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<br><br><br><br><br><br>
+{% endblock %}

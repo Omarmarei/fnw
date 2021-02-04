@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th scope="col">Sympol</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Price</th>
+          <th scope="col">Date</th>
+          <th scope="col">Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in historyrec %}
+        <tr>
+            <td>{{item.symbol}}</td>
+            <td>{{item.shares}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.time}}</td>
+            <td>{{item.operation}}</td>
+        </tr>
+        {% endfor %}
+  </tbody>
+</table>
+<br><br><br><br><br><br>
+{% endblock %}
+
+
+
